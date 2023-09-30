@@ -1,7 +1,5 @@
 """
 Transforms and Loads data into the local SQLite3 database
-Example:
-,general name,count_products,ingred_FPro,avg_FPro_products,avg_distance_root,ingred_normalization_term,semantic_tree_name,semantic_tree_node
 """
 import sqlite3
 import csv
@@ -14,17 +12,18 @@ def load(dataset="data/alcohol.csv"):
     #prints the full working directory and path
     # print(os.getcwd())
     payload = csv.reader(open(dataset, newline=''), delimiter=',')
+    next(payload)
     conn = sqlite3.connect('alcoholDB.db')
     c = conn.cursor()
     c.execute("DROP TABLE IF EXISTS alcoholDB")
     c.execute("""
-              CREATE TABLE GroceryDB (
-                    id PRIMARY KEY AUTOINCREMENT,
+              CREATE TABLE alcoholDB (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                     country TEXT, 
                     beer_sevrings INTEGER,
                     spirit_servings INTEGER,
                     wine_servings INTEGER,
-                    total_pur_alcohol
+                    total_pure_alcohol
                   )
               """)
     #insert
@@ -34,7 +33,7 @@ def load(dataset="data/alcohol.csv"):
                         beer_sevrings,
                         spirit_servings,
                         wine_servings,
-                        total_pur_alcohol
+                        total_pure_alcohol
                       ) 
                       VALUES (?, ?, ?, ?, ?)
                   """, 

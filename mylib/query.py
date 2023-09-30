@@ -12,124 +12,96 @@ def log_query(query):
         file.write(f"```sql\n{query}\n```\n\n")
 
 
-def general_query(query):
-    """runs a query a user inputs"""
-    # Connect to the SQLite database
-    conn = sqlite3.connect("alcoholDB.db")
-
-    # Create a cursor object to execute SQL queries
-    cursor = conn.cursor()
-
-    # Execute the query
-    cursor.execute(query)
-
-    # If the query modifies the database, commit the changes
-    if (
-        query.strip().lower().startswith("insert")
-        or query.strip().lower().startswith("update")
-        or query.strip().lower().startswith("delete")
-    ):
-        conn.commit()
-
-    # Close the cursor and connection
-    cursor.close()
-    conn.close()
-
-    log_query(f"{query}")
-
-
 def create_record(
-    server, seconds_before_next_point, day, opponent, game_score, sets, game
+    country, beer_sevrings, spirit_servings, wine_servings, total_pure_alcohol
 ):
     """create example query"""
-    conn = sqlite3.connect("ServeTimesDB.db")
+    conn = sqlite3.connect("alcoholDB.db")
     c = conn.cursor()
     c.execute(
         """
-        INSERT INTO ServeTimesDB 
-        (server, seconds_before_next_point, day, opponent, game_score, sets, game) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO alcoholDB 
+        (country, beer_sevrings, spirit_servings, wine_servings, total_pure_alcohol) 
+        VALUES (?, ?, ?, ?, ?)
         """,
-        (server, seconds_before_next_point, day, opponent, game_score, sets, game),
+        (country, beer_sevrings, spirit_servings, wine_servings, total_pure_alcohol),
     )
     conn.commit()
     conn.close()
 
-    # Log the query
-    log_query(
-        f"""INSERT INTO ServeTimesDB VALUES (
-            {server}, 
-            {seconds_before_next_point}, 
-            {day}, 
-            {opponent}, 
-            {game_score}, 
-            {sets}, 
-            {game});"""
-    )
+    # log_query(
+    #     f"""INSERT INTO alcoholDB VALUES (
+    #             {country}, 
+    #             {beer_sevrings},
+    #             {spirit_servings},
+    #             {wine_servings},
+    #             {total_pure_alcohol});"""
+    # )
+
+
+def read_data():
+    """read data"""
+    conn = sqlite3.connect("alcoholDB.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM alcoholDB")
+    data = c.fetchall()
+    log_query("SELECT * FROM alcoholDB;")
+    return data
 
 
 def update_record(
-    record_id, server, seconds_before_next_point, day, opponent, game_score, sets, game
+            record_id,
+            country, 
+            beer_sevrings,
+            spirit_servings,
+            wine_servings,
+            total_pure_alcohol
 ):
     """update example query"""
-    conn = sqlite3.connect("ServeTimesDB.db")
+    conn = sqlite3.connect("alcoholDB.db")
     c = conn.cursor()
     c.execute(
         """
-        UPDATE ServeTimesDB 
-        SET server=?, 
-        seconds_before_next_point=?, 
-        day=?, opponent=?, 
-        game_score=?, 
-        sets=?, 
-        game=?
+        UPDATE alcoholDB 
+        SET country=?, 
+        beer_sevrings=?, 
+        spirit_servings=?, 
+        wine_servings=?, 
+        total_pure_alcohol=?
         WHERE id=?
         """,
         (
-            server,
-            seconds_before_next_point,
-            day,
-            opponent,
-            game_score,
-            sets,
-            game,
-            record_id,
+            country, 
+            beer_sevrings,
+            spirit_servings,
+            wine_servings,
+            total_pure_alcohol,
+            record_id
         ),
     )
     conn.commit()
     conn.close()
 
     # Log the query
-    log_query(
-        f"""UPDATE ServeTimesDB SET 
-        server={server}, 
-        seconds_before_next_point=
-        {seconds_before_next_point},
-        day={day}, opponent={opponent}, 
-        game_score={game_score}, 
-        sets={sets}, 
-        game={game} 
-        WHERE id={record_id};"""
-    )
+    # log_query(
+    #     f"""UPDATE alcoholDB SET 
+    #     country={country}, 
+    #     beer_sevringst=
+    #     {beer_sevrings},
+    #     spirit_servings={spirit_servings}, 
+    #     wine_servings={wine_servings}, 
+    #     total_pure_alcohol={total_pure_alcohol},
+    #     WHERE id={record_id};"""
+    # )
 
 
 def delete_record(record_id):
     """delete example query"""
-    conn = sqlite3.connect("ServeTimesDB.db")
+    conn = sqlite3.connect("alcoholDB.db")
     c = conn.cursor()
-    c.execute("DELETE FROM ServeTimesDB WHERE id=?", (record_id,))
+    c.execute("DELETE FROM alcoholDB WHERE id=?", (record_id,))
     conn.commit()
     conn.close()
 
     # Log the query
-    log_query(f"DELETE FROM ServeTimesDB WHERE id={record_id};")
-
-
-def read_data():
-    """read data"""
-    conn = sqlite3.connect("ServeTimesDB.db")
-    c = conn.cursor()
-    c.execute("SELECT * FROM ServeTimesDB")
-    data = c.fetchall()
-    log_query("SELECT * FROM ServeTimesDB;")
-    return data
+    # log_query(f"DELETE FROM alcoholDB WHERE id={record_id};")
