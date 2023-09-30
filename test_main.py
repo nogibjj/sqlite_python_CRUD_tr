@@ -37,7 +37,7 @@ def test_update_record():
             "python",
             "main.py",
             "update_record",
-            "1000",
+            "3",
             "country_A",
             "10",
             "10",
@@ -71,10 +71,10 @@ def test_create_record():
             "update_record",
             "1000",
             "country_A",
-            "10",
-            "10",
-            "10",
-            "10"
+            "1",
+            "1",
+            "1",
+            "1.1"
         ],
         capture_output=True,
         text=True,
