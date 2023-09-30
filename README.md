@@ -18,9 +18,12 @@ The purpose of this project is to create CRUD actions using SQLite and Python, a
 
 ## Actions 
 1. **Format**: `make format`    
-2. **Lint**: `make lint`    
-3. **Test**: `make test`
+2. **Lint**: `make lint`
+<img width="602" alt="lint" src="https://github.com/nogibjj/sqlite_python_CRUD_tr/assets/104114843/93922bec-895c-4f18-976b-20ac76af6d95">
 
+3. **Test**: `make test`
+<img width="1041" alt="test1" src="https://github.com/nogibjj/sqlite_python_CRUD_tr/assets/104114843/db906ef4-fc36-4857-b27f-c46b88ad58d9">
+<img width="1048" alt="test2" src="https://github.com/nogibjj/sqlite_python_CRUD_tr/assets/104114843/469e7226-a56b-42a8-afe0-59912a18619b">
 
 ## Tests
 ### CRUD Actions
