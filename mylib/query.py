@@ -29,14 +29,14 @@ def create_record(
     conn.commit()
     conn.close()
 
-    # log_query(
-    #     f"""INSERT INTO alcoholDB VALUES (
-    #             {country}, 
-    #             {beer_sevrings},
-    #             {spirit_servings},
-    #             {wine_servings},
-    #             {total_pure_alcohol});"""
-    # )
+    log_query(
+        f"""INSERT INTO alcoholDB VALUES (
+                {country}, 
+                {beer_sevrings},
+                {spirit_servings},
+                {wine_servings},
+                {total_pure_alcohol});"""
+    )
 
 
 def read_data():
@@ -82,17 +82,16 @@ def update_record(
     conn.commit()
     conn.close()
 
-    # Log the query
-    # log_query(
-    #     f"""UPDATE alcoholDB SET 
-    #     country={country}, 
-    #     beer_sevringst=
-    #     {beer_sevrings},
-    #     spirit_servings={spirit_servings}, 
-    #     wine_servings={wine_servings}, 
-    #     total_pure_alcohol={total_pure_alcohol},
-    #     WHERE id={record_id};"""
-    # )
+    log_query(
+        f"""UPDATE alcoholDB SET 
+        country={country}, 
+        beer_sevringst=
+        {beer_sevrings},
+        spirit_servings={spirit_servings}, 
+        wine_servings={wine_servings}, 
+        total_pure_alcohol={total_pure_alcohol},
+        WHERE id={record_id};"""
+    )
 
 
 def delete_record(record_id):
@@ -103,5 +102,4 @@ def delete_record(record_id):
     conn.commit()
     conn.close()
 
-    # Log the query
-    # log_query(f"DELETE FROM alcoholDB WHERE id={record_id};")
+    log_query(f"DELETE FROM alcoholDB WHERE id={record_id};")

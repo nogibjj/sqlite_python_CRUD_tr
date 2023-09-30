@@ -6,3 +6,7 @@ SELECT * FROM alcoholDB;
 SELECT * FROM alcoholDB;
 ```
 
+```sql
+DELETE FROM alcoholDB WHERE id=10;
+```
+
